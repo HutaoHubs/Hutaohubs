@@ -1,697 +1,490 @@
-print("Loaded all settings    [1/6]")
-if game.PlaceId ~= 142823291 then game:GetService("TeleportService"):Teleport(142823291) end
-if typeof(getgenv().mm2) == "Instance" then getgenv().mm2:Destroy() end
-local ss = getgenv().Settings
-local players = game:GetService("Players")
-local player = players.LocalPlayer
-local camera = workspace.CurrentCamera
-local mouse = player:GetMouse()
-local UIS = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
-print("Loaded all variables   [2/6]")
-local MM2 = Instance.new("ScreenGui")
-local Topbar = Instance.new("Frame")
-local Main = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local Murderer = Instance.new("TextButton")
-local UICorner_2 = Instance.new("UICorner")
-local Sheriff = Instance.new("TextButton")
-local UICorner_3 = Instance.new("UICorner")
-local MurdererText = Instance.new("TextLabel")
-local SheriffText = Instance.new("TextLabel")
-local GunDropText = Instance.new("TextLabel")
-local GunDrop = Instance.new("TextButton")
-local UICorner_4 = Instance.new("UICorner")
-local UICorner_5 = Instance.new("UICorner")
-local Title = Instance.new("TextLabel")
-local Credit = Instance.new("TextLabel")
-local Spectating = Instance.new("TextLabel")
-print("Loaded all instances   [3/6]")
-if game.PlaceId ~= 142823291 then MM2:Destroy() end
+already_ran = false
 
-MM2.Name = "MM2"
-MM2.Parent = game:GetService("CoreGui")
-getgenv().mm2 = MM2
-
-Topbar.Name = "Topbar"
-Topbar.Parent = MM2
-Topbar.AnchorPoint = Vector2.new(0.5,0.5)
-Topbar.BackgroundColor3 = Color3.fromRGB(19, 19, 19)
-Topbar.Position = UDim2.new(0.5, 0, 0.375, 0)
-Topbar.Size = UDim2.new(0, 170, 0, 30)
-Topbar.ZIndex = 11
-
-Main.Name = "Main"
-Main.Parent = Topbar
-Main.AnchorPoint = Vector2.new(0.5,0)
-Main.ClipsDescendants = true
-Main.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-Main.Position = UDim2.new(0.5, 0, 0, 0)
-Main.Size = UDim2.new(0, 170, 0, 209)
-Main.ZIndex = 10
-
-UICorner.Name = "UICorner"
-UICorner.CornerRadius = UDim.new(0, 6)
-UICorner.Parent = Main
-
-Murderer.Name = "Murderer"
-Murderer.Parent = Main
-Murderer.BackgroundColor3 = Color3.fromRGB(19, 19, 19)
-Murderer.Position = UDim2.new(0.0602940023, 0, 0.142000005, 25)
-Murderer.Size = UDim2.new(0, 150, 0, 30)
-Murderer.ZIndex = 11
-Murderer.Font = Enum.Font.GothamBold
-Murderer.Text = "None"
-Murderer.TextColor3 = Color3.fromRGB(255, 100, 100)
-Murderer.TextSize = 16.000
-Murderer.AutoButtonColor = false
-
-UICorner_2.Name = "UICorner"
-UICorner_2.CornerRadius = UDim.new(0, 6)
-UICorner_2.Parent = Murderer
-
-Sheriff.Name = "Sheriff"
-Sheriff.Parent = Main
-Sheriff.BackgroundColor3 = Color3.fromRGB(19, 19, 19)
-Sheriff.Position = UDim2.new(0.0602940321, 0, 0.400999993, 25)
-Sheriff.Size = UDim2.new(0, 150, 0, 30)
-Sheriff.ZIndex = 11
-Sheriff.Font = Enum.Font.GothamBold
-Sheriff.Text = "None"
-Sheriff.TextColor3 = Color3.fromRGB(100, 100, 255)
-Sheriff.TextSize = 16.000
-Sheriff.AutoButtonColor = false
-
-UICorner_3.Name = "UICorner"
-UICorner_3.CornerRadius = UDim.new(0, 6)
-UICorner_3.Parent = Sheriff
-
-MurdererText.Name = "MurdererText"
-MurdererText.Parent = Main
-MurdererText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-MurdererText.BackgroundTransparency = 1.000
-MurdererText.Position = UDim2.new(0.0544118881, 0, 0.144037277, 0)
-MurdererText.Size = UDim2.new(0, 150, 0, 24)
-MurdererText.ZIndex = 11
-MurdererText.Font = Enum.Font.GothamBold
-MurdererText.Text = "Murderer"
-MurdererText.TextColor3 = Color3.fromRGB(255, 0, 0)
-MurdererText.TextSize = 16.000
-
-SheriffText.Name = "SheriffText"
-SheriffText.Parent = Main
-SheriffText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SheriffText.BackgroundTransparency = 1.000
-SheriffText.Position = UDim2.new(0.0602941513, 0, 0.403182238, 0)
-SheriffText.Size = UDim2.new(0, 150, 0, 24)
-SheriffText.ZIndex = 11
-SheriffText.Font = Enum.Font.GothamBold
-SheriffText.Text = "Sheriff"
-SheriffText.TextColor3 = Color3.fromRGB(0, 0, 255)
-SheriffText.TextSize = 16.000
-
-GunDropText.Name = "GunDropText"
-GunDropText.Parent = Main
-GunDropText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-GunDropText.BackgroundTransparency = 1.000
-GunDropText.Position = UDim2.new(0.0602941513, 0, 0.661555469, 0)
-GunDropText.Size = UDim2.new(0, 150, 0, 24)
-GunDropText.ZIndex = 11
-GunDropText.Font = Enum.Font.GothamBold
-GunDropText.Text = "Gun Dropped"
-GunDropText.TextColor3 = Color3.fromRGB(0, 255, 0)
-GunDropText.TextSize = 16.000
-
-GunDrop.Name = "GunDrop"
-GunDrop.Parent = Main
-GunDrop.BackgroundColor3 = Color3.fromRGB(19, 19, 19)
-GunDrop.Position = UDim2.new(0.0602940321, 0, 0.660000026, 25)
-GunDrop.Size = UDim2.new(0, 150, 0, 30)
-GunDrop.ZIndex = 11
-GunDrop.Font = Enum.Font.GothamBold
-GunDrop.Text = "nil"
-GunDrop.TextColor3 = Color3.fromRGB(255, 255, 255)
-GunDrop.TextSize = 16.000
-GunDrop.AutoButtonColor = false
-
-UICorner_4.Name = "UICorner"
-UICorner_4.CornerRadius = UDim.new(0, 6)
-UICorner_4.Parent = GunDrop
-
-UICorner_5.Name = "UICorner"
-UICorner_5.CornerRadius = UDim.new(0, 6)
-UICorner_5.Parent = Topbar
-
-Title.Name = "Title"
-Title.Parent = Topbar
-Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title.BackgroundTransparency = 1.000
-Title.BorderSizePixel = 0
-Title.Position = UDim2.new(0.247058824, 0, 0, 0)
-Title.Size = UDim2.new(0, 85, 0, 30)
-Title.ZIndex = 12
-Title.Font = Enum.Font.GothamBold
-Title.Text = "Error Occurred" -- dont change
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextSize = 16.000
-
-Credit.Name = "Credit"
-Credit.Parent = Main
-Credit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Credit.BackgroundTransparency = 1.000
-Credit.Position = UDim2.new(0.06, 0, 0.923, 0)
-Credit.Size = UDim2.new(0, 150, 0, 15)
-Credit.ZIndex = 11
-Credit.Font = Enum.Font.GothamBold
-Credit.Text = "Made by #vanila_cream"
-Credit.TextColor3 = Color3.fromRGB(255, 255, 255)
-Credit.TextSize = 12.000
-
-Spectating.Name = "Spectating"
-Spectating.Parent = MM2
-Spectating.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Spectating.BackgroundTransparency = 1.000
-Spectating.Position = UDim2.new(0.5, 0, 0.8, 0)
-Spectating.Size = UDim2.new(0, 150, 0, 15)
-Spectating.ZIndex = 15
-Spectating.Font = Enum.Font.GothamBold
-Spectating.Text = "Spectating: None"
-Spectating.TextColor3 = Color3.fromRGB(255, 255, 255)
-Spectating.TextSize = 32.000
-Spectating.AnchorPoint = Vector2.new(0.5,0.5)
-Spectating.Visible = false
-print("Loaded all properties  [4/6]")
-local folder = Instance.new("Folder")
-folder.Parent = MM2
-folder.Name = "Folder"
-function notif(text)
-	if typeof(text) == "string" and ss.Notifications then
-		game.StarterGui:SetCore("SendNotification", {
-			Title = "MM2 Utilities",
-			Text = text,
-			Duration = 1.5,
-		})
+for _,v in pairs(game.Lighting:GetChildren()) do
+	if v.Name == "hatsublue" then
+		already_ran = true
 	end
 end
-local aimbottoggled = false
-UIS.InputBegan:Connect(function(input, gameProcessed)
-	if input.KeyCode == Enum.KeyCode.Y then
-		aimbottoggled = not aimbottoggled
-		notif("Aimbot toggled: "..tostring(aimbottoggled))
-	end
-end)
-function bruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruh()
-	for i,v in pairs(folder:GetChildren()) do
-		v:Destroy()
-	end
-	for i,v in pairs(workspace:GetDescendants()) do
-		if v.Name == "Raggy" and ss.RemoveRagdolls then
-			v:Destroy()
-		elseif v.Name == "GlitchProof" and v.ClassName == "Model" and ss.RemoveBarriers then
+if already_ran == false then
+	blur = Instance.new("BlurEffect")
+	blur.Parent = game.Lighting
+	blur.Size = 4
+
+	color_correction = Instance.new("ColorCorrectionEffect")
+	color_correction.Parent = game.Lighting
+	color_correction.TintColor = Color3.fromRGB(192, 201, 255)
+	color_correction.Name = "hatsublue"
+end
+
+function iterate_in(model)
+	for _,v in pairs(model:GetChildren()) do
+		if v:IsA("Sound") then
 			v:Destroy()
 		end
+		if v:IsA("Model") or v:IsA("Folder") then
+			iterate_in(v)
+		end
 	end
-	for i,v in pairs(players:GetChildren()) do
-		if v.Name ~= player.Name and not folder:FindFirstChild(v.Name) then
-			if ss.NameEsp then
-				local Billboard = Instance.new("BillboardGui", folder)
-				local Name = Instance.new("TextLabel", Billboard)
-				Billboard.Name = v.Name
-				Billboard.Adornee = v.Character.Head
-				Billboard.Size = UDim2.new(10, 0, 4, 0)
-				Billboard.ExtentsOffset = Vector3.new(0, 3, 0)
-				Billboard.AlwaysOnTop = true
-				Billboard.MaxDistance = math.huge
-				Name.Name = "Name"
-				Name.BackgroundTransparency = 1
-				Name.TextTransparency = ss.NameTextTransparency
-				Name.BorderSizePixel = 0
-				Name.Font = ss.NameFont
-				Name.Size = UDim2.new(1, 0, 1, 0)
-				Name.Text = v.Name
-				Name.TextColor3 = ss.InnocentColor
-				Name.TextScaled = false
-				Name.TextSize = 18
-				if v.Backpack:FindFirstChild("Knife") or v.Character:FindFirstChild("Knife") then
-					Murderer.Text = v.Name
-					Name.TextColor3 = ss.MurdererColor
-					if not Murderer.TextFits then
-						Murderer.TextScaled = true
-					else
-						Murderer.TextScaled = false
+end
+
+iterate_in(workspace)
+
+Sound = Instance.new("Sound")
+Sound.Parent = workspace
+Sound.SoundId = "rbxassetid://2080184344"
+Sound.Playing = true
+Sound.Looped = true
+
+local ScreenGui = Instance.new("ScreenGui")
+local main = Instance.new("Frame")
+local title_frame = Instance.new("Frame")
+local title = Instance.new("TextLabel")
+local ImageLabel = Instance.new("ImageLabel")
+local title_2 = Instance.new("TextLabel")
+local speed_textbox = Instance.new("TextBox")
+local teleport_button = Instance.new("TextButton")
+local player_textbox = Instance.new("TextBox")
+local speed_button = Instance.new("TextButton")
+local get_coins = Instance.new("TextButton")
+local discord = Instance.new("TextLabel")
+local noclip_button = Instance.new("TextButton")
+local coin_textbox = Instance.new("TextBox")
+local teleport_random = Instance.new("TextButton")
+local tele_random_textbox = Instance.new("TextBox")
+local xray_button = Instance.new("TextButton")
+local btools = Instance.new("TextButton")
+local xray_textbox = Instance.new("TextBox")
+local open_close = Instance.new("Frame")
+local open = Instance.new("TextButton")
+local close = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+main.Name = "main"
+main.Parent = ScreenGui
+main.BackgroundColor3 = Color3.fromRGB(0, 61, 54)
+main.BorderColor3 = Color3.fromRGB(0, 41, 42)
+main.BorderSizePixel = 4
+main.Position = UDim2.new(0.614972532, 0, 0.106025726, 0)
+main.Size = UDim2.new(0, 254, 0, 337)
+
+title_frame.Name = "title_frame"
+title_frame.Parent = main
+title_frame.BackgroundColor3 = Color3.fromRGB(0, 95, 84)
+title_frame.BorderColor3 = Color3.fromRGB(0, 41, 42)
+title_frame.BorderSizePixel = 4
+title_frame.Size = UDim2.new(0, 254, 0, 48)
+
+title.Name = "title"
+title.Parent = title_frame
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1.000
+title.Size = UDim2.new(0, 254, 0, 50)
+title.Font = Enum.Font.SourceSans
+title.Text = "Murder mystery GUI"
+title.TextColor3 = Color3.fromRGB(255, 149, 0)
+title.TextSize = 38.000
+
+ImageLabel.Parent = main
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(-0.531496048, 0, 0.459537745, 0)
+ImageLabel.Size = UDim2.new(0, 125, 0, 110)
+ImageLabel.Image = "rbxassetid://130812232"
+
+title_2.Name = "title"
+title_2.Parent = main
+title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title_2.BackgroundTransparency = 1.000
+title_2.Position = UDim2.new(0.5, 0, 1.0468713, 0)
+title_2.Size = UDim2.new(0, 127, 0, 28)
+title_2.Font = Enum.Font.SourceSans
+title_2.Text = "JUKjacker"
+title_2.TextColor3 = Color3.fromRGB(221, 139, 255)
+title_2.TextSize = 30.000
+
+speed_textbox.Name = "speed_textbox"
+speed_textbox.Parent = main
+speed_textbox.BackgroundColor3 = Color3.fromRGB(65, 120, 118)
+speed_textbox.BorderColor3 = Color3.fromRGB(0, 62, 63)
+speed_textbox.Position = UDim2.new(0.0157480314, 0, 0.277282804, 0)
+speed_textbox.Size = UDim2.new(0, 120, 0, 30)
+speed_textbox.Font = Enum.Font.SourceSans
+speed_textbox.Text = ""
+speed_textbox.TextColor3 = Color3.fromRGB(255, 211, 33)
+speed_textbox.TextSize = 14.000
+
+teleport_button.Name = "teleport_button"
+teleport_button.Parent = main
+teleport_button.BackgroundColor3 = Color3.fromRGB(0, 120, 106)
+teleport_button.BorderColor3 = Color3.fromRGB(0, 62, 63)
+teleport_button.BorderSizePixel = 2
+teleport_button.Position = UDim2.new(0.531496048, 0, 0.168633044, 0)
+teleport_button.Size = UDim2.new(0, 116, 0, 30)
+teleport_button.Font = Enum.Font.SourceSans
+teleport_button.Text = "Teleport to player"
+teleport_button.TextColor3 = Color3.fromRGB(255, 211, 33)
+teleport_button.TextSize = 16.000
+
+player_textbox.Name = "player_textbox"
+player_textbox.Parent = main
+player_textbox.BackgroundColor3 = Color3.fromRGB(65, 120, 118)
+player_textbox.BorderColor3 = Color3.fromRGB(0, 62, 63)
+player_textbox.Position = UDim2.new(0.531496048, 0, 0.274632305, 0)
+player_textbox.Size = UDim2.new(0, 116, 0, 30)
+player_textbox.Font = Enum.Font.SourceSans
+player_textbox.Text = ""
+player_textbox.TextColor3 = Color3.fromRGB(255, 211, 33)
+player_textbox.TextSize = 14.000
+
+speed_button.Name = "speed_button"
+speed_button.Parent = main
+speed_button.BackgroundColor3 = Color3.fromRGB(0, 120, 106)
+speed_button.BorderColor3 = Color3.fromRGB(0, 62, 63)
+speed_button.BorderSizePixel = 2
+speed_button.Position = UDim2.new(0.00787401572, 0, 0.169174761, 0)
+speed_button.Size = UDim2.new(0, 122, 0, 30)
+speed_button.Font = Enum.Font.SourceSans
+speed_button.Text = "Speed"
+speed_button.TextColor3 = Color3.fromRGB(255, 211, 33)
+speed_button.TextSize = 30.000
+speed_button.TextWrapped = true
+
+get_coins.Name = "get_coins"
+get_coins.Parent = main
+get_coins.BackgroundColor3 = Color3.fromRGB(0, 120, 106)
+get_coins.BorderColor3 = Color3.fromRGB(0, 62, 63)
+get_coins.BorderSizePixel = 2
+get_coins.Position = UDim2.new(0.0157480314, 0, 0.392742634, 0)
+get_coins.Size = UDim2.new(0, 188, 0, 30)
+get_coins.Font = Enum.Font.SourceSans
+get_coins.Text = "Get a coin every x seconds"
+get_coins.TextColor3 = Color3.fromRGB(255, 211, 33)
+get_coins.TextSize = 20.000
+
+discord.Name = "discord"
+discord.Parent = main
+discord.BackgroundColor3 = Color3.fromRGB(0, 120, 106)
+discord.BorderColor3 = Color3.fromRGB(0, 62, 63)
+discord.BorderSizePixel = 2
+discord.Position = UDim2.new(-0.531496048, 0, 0.812979817, 0)
+discord.Size = UDim2.new(0, 127, 0, 33)
+discord.Font = Enum.Font.SourceSans
+discord.Text = "Discord server: 9tpmepb"
+discord.TextColor3 = Color3.fromRGB(255, 241, 37)
+discord.TextSize = 14.000
+
+noclip_button.Name = "noclip_button"
+noclip_button.Parent = main
+noclip_button.BackgroundColor3 = Color3.fromRGB(0, 120, 106)
+noclip_button.BorderColor3 = Color3.fromRGB(0, 62, 63)
+noclip_button.BorderSizePixel = 2
+noclip_button.Position = UDim2.new(0.0157480314, 0, 0.503995121, 0)
+noclip_button.Size = UDim2.new(0, 246, 0, 30)
+noclip_button.Font = Enum.Font.SourceSans
+noclip_button.Text = "e to noclip"
+noclip_button.TextColor3 = Color3.fromRGB(255, 211, 33)
+noclip_button.TextSize = 20.000
+
+coin_textbox.Name = "coin_textbox"
+coin_textbox.Parent = main
+coin_textbox.BackgroundColor3 = Color3.fromRGB(65, 120, 118)
+coin_textbox.BorderColor3 = Color3.fromRGB(0, 62, 63)
+coin_textbox.Position = UDim2.new(0.797752559, 0, 0.389500797, 0)
+coin_textbox.Size = UDim2.new(0, 48, 0, 30)
+coin_textbox.Font = Enum.Font.SourceSans
+coin_textbox.Text = ""
+coin_textbox.TextColor3 = Color3.fromRGB(255, 211, 33)
+coin_textbox.TextSize = 30.000
+
+teleport_random.Name = "teleport_random"
+teleport_random.Parent = main
+teleport_random.BackgroundColor3 = Color3.fromRGB(0, 120, 106)
+teleport_random.BorderColor3 = Color3.fromRGB(0, 62, 63)
+teleport_random.BorderSizePixel = 2
+teleport_random.Position = UDim2.new(0.0157480314, 0, 0.612641811, 0)
+teleport_random.Size = UDim2.new(0, 197, 0, 30)
+teleport_random.Font = Enum.Font.SourceSans
+teleport_random.Text = "tele to random every x seconds"
+teleport_random.TextColor3 = Color3.fromRGB(255, 211, 33)
+teleport_random.TextSize = 16.000
+
+tele_random_textbox.Name = "tele_random_textbox"
+tele_random_textbox.Parent = main
+tele_random_textbox.BackgroundColor3 = Color3.fromRGB(65, 120, 118)
+tele_random_textbox.BorderColor3 = Color3.fromRGB(0, 62, 63)
+tele_random_textbox.Position = UDim2.new(0.826211512, 0, 0.612357855, 0)
+tele_random_textbox.Size = UDim2.new(0, 40, 0, 30)
+tele_random_textbox.Font = Enum.Font.SourceSans
+tele_random_textbox.Text = ""
+tele_random_textbox.TextColor3 = Color3.fromRGB(255, 211, 33)
+tele_random_textbox.TextSize = 14.000
+
+xray_button.Name = "xray_button"
+xray_button.Parent = main
+xray_button.BackgroundColor3 = Color3.fromRGB(0, 120, 106)
+xray_button.BorderColor3 = Color3.fromRGB(0, 62, 63)
+xray_button.BorderSizePixel = 2
+xray_button.Position = UDim2.new(0.0157480314, 0, 0.722434103, 0)
+xray_button.Size = UDim2.new(0, 198, 0, 30)
+xray_button.Font = Enum.Font.SourceSans
+xray_button.Text = "XRAY (set transparency)"
+xray_button.TextColor3 = Color3.fromRGB(255, 211, 33)
+xray_button.TextSize = 22.000
+
+btools.Name = "btools"
+btools.Parent = main
+btools.BackgroundColor3 = Color3.fromRGB(0, 120, 106)
+btools.BorderColor3 = Color3.fromRGB(0, 62, 63)
+btools.BorderSizePixel = 2
+btools.Position = UDim2.new(0.0157480314, 0, 0.841128469, 0)
+btools.Size = UDim2.new(0, 245, 0, 30)
+btools.Font = Enum.Font.SourceSans
+btools.Text = "Btools"
+btools.TextColor3 = Color3.fromRGB(255, 211, 33)
+btools.TextSize = 25.000
+
+xray_textbox.Name = "xray_textbox"
+xray_textbox.Parent = main
+xray_textbox.BackgroundColor3 = Color3.fromRGB(65, 120, 118)
+xray_textbox.BorderColor3 = Color3.fromRGB(0, 62, 63)
+xray_textbox.Position = UDim2.new(0.826211512, 0, 0.722150147, 0)
+xray_textbox.Size = UDim2.new(0, 40, 0, 30)
+xray_textbox.Font = Enum.Font.SourceSans
+xray_textbox.Text = ""
+xray_textbox.TextColor3 = Color3.fromRGB(255, 211, 33)
+xray_textbox.TextSize = 14.000
+
+open_close.Name = "open_close"
+open_close.Parent = ScreenGui
+open_close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+open_close.BackgroundTransparency = 1.000
+open_close.Position = UDim2.new(0.231683165, 0, 0, 0)
+open_close.Size = UDim2.new(0, 435, 0, 100)
+
+open.Name = "open"
+open.Parent = open_close
+open.BackgroundColor3 = Color3.fromRGB(0, 120, 106)
+open.BorderColor3 = Color3.fromRGB(0, 62, 63)
+open.BorderSizePixel = 2
+open.Position = UDim2.new(0.402298838, 0, -0.219999999, 0)
+open.Size = UDim2.new(0, 43, 0, 36)
+open.Font = Enum.Font.SourceSans
+open.Text = "Open"
+open.TextColor3 = Color3.fromRGB(255, 241, 37)
+open.TextSize = 20.000
+
+close.Name = "close"
+close.Parent = open_close
+close.BackgroundColor3 = Color3.fromRGB(0, 120, 106)
+close.BorderColor3 = Color3.fromRGB(0, 62, 63)
+close.BorderSizePixel = 2
+close.Position = UDim2.new(0.528735638, 0, -0.219999999, 0)
+close.Size = UDim2.new(0, 43, 0, 36)
+close.Font = Enum.Font.SourceSans
+close.Text = "Close"
+close.TextColor3 = Color3.fromRGB(255, 241, 37)
+close.TextSize = 20.000
+
+-- Scripts:
+
+local function MXUYWL_fake_script() -- teleport_button.LocalScript 
+	local script = Instance.new('LocalScript', teleport_button)
+
+	script.Parent.MouseButton1Click:connect(function()
+		local map = nil
+		local function look_for_map_in(part) 
+			for _,v in pairs(part:GetChildren()) do
+				if v:IsA("Model") then
+					for _,d in pairs(v:GetChildren()) do
+						if d.Name == "Map" then
+							map = v
+						end
 					end
-				elseif v.Backpack:FindFirstChild("Gun") or v.Character:FindFirstChild("Gun") then
-					Sheriff.Text = v.Name
-					Name.TextColor3 = ss.SheriffColor
-					if not Sheriff.TextFits then
-						Sheriff.TextScaled = true
-					else
-						Sheriff.TextScaled = false
-					end
-				elseif ss.AvoidInnocents and not v.Backpack:FindFirstChild("Knife") or v.Character:FindFirstChild("Knife") or v.Backpack:FindFirstChild("Gun") or v.Character:FindFirstChild("Gun") then
-					Billboard:Destroy()
 				end
-			end -- ss.NameEsp
-		end -- Name Check
-	end -- for i,v
-	if workspace:FindFirstChild("GunDrop",true) then
-		if ss.GunEsp then
-			local GunEsp = Instance.new("BoxHandleAdornment", folder)
-			GunEsp.Name = "Gun"
-			GunEsp.Adornee = game.Workspace.GunDrop
-			GunEsp.AlwaysOnTop = true
-			GunEsp.Color3 = ss.GunEspColor
-			GunEsp.Size = game.Workspace.GunDrop.Size
-			GunEsp.Transparency = 0.6
-			GunEsp.ZIndex = 0
-			if ss.GunNameEsp then
-				local Billboard = Instance.new("BillboardGui", folder)
-				local Name = Instance.new("TextLabel", Billboard)
-				Billboard.Name = "Gun"
-				Billboard.Adornee = game.Workspace.GunDrop
-				Billboard.Size = UDim2.new(10, 0, 4, 0)
-				Billboard.ExtentsOffset = Vector3.new(0, 3, 0)
-				Billboard.AlwaysOnTop = true
-				Billboard.MaxDistance = math.huge
-				Name.Name = "Name"
-				Name.BackgroundTransparency = 1
-				Name.TextTransparency = ss.GunNameTransparency
-				Name.BorderSizePixel = 0
-				Name.Font = ss.NameFont
-				Name.Size = UDim2.new(1, 0, 1, 0)
-				Name.Text = "Gun"
-				Name.TextColor3 = ss.GunNameColor
-				Name.TextScaled = false
-				Name.TextSize = 18
 			end
 		end
-		if ss.AutoPickupGun then
-			local hrp = player.Character.HumanoidRootPart
-			local OldCF = hrp.CFrame
-			hrp.CFrame = game.Workspace.GunDrop.CFrame
-			wait(0.2)
-			hrp.CFrame = OldCF
-		end
-		GunDrop.Text = "True"
-		GunDrop.TextColor3 = ss.GColorT
-	else
-		GunDrop.Text = "False"
-		GunDrop.TextColor3 = ss.GColorF
-	end
-	if ss.Aimbot then
-		local keypressed = false
-		local team
-		local target
-		mouse.Button2Down:Connect(function()
-			keypressed = true
-		end)
-		mouse.Button2Up:Connect(function()
-			keypressed = false
-		end)
-		if player.Backpack:FindFirstChild("Knife") or player.Character:FindFirstChild("Knife") then
-			team = "Murderer"
-			target = players[Sheriff.Text].Character.HumanoidRootPart
-			if ss.AimbotAsMurderer then
-				aimbottoggled = true
-				notif("Aimbot toggled: true (Murderer)")
-				repeat
-					if keypressed and aimbottoggled then
-						camera.CFrame = CFrame.new(camera.CFrame.Position, target.Position)
-					end
-					RunService.RenderStepped:Wait()
-				until players[Sheriff.Text].Character.Humanoid.Health < 1 or team == nil or ss.Aimbot == false or ss.AimbotAsMurderer == false
-			end
-		elseif player.Backpack:FindFirstChild("Gun") or player.Character:FindFirstChild("Gun") then
-			team = "Sheriff"
-			target = players[Murderer.Text].Character.HumanoidRootPart
-			if ss.AimbotAsSheriff then
-				aimbottoggled = true
-				notif("Aimbot toggled: true (Sheriff)")
-				repeat
-					if keypressed and aimbottoggled then
-						camera.CFrame = CFrame.new(camera.CFrame.Position, target.Position)
-					end
-					RunService.RenderStepped:Wait()
-				until players[Murderer.Text].Character.Humanoid.Health < 1 or team == nil or ss.Aimbot == false or ss.AimbotAsSheriff == false
-			end
-		else
-			team = nil
-			target = nil
-			aimbottoggled = false
-		end
-	end
-end
-local object = workspace
-function XrayOn(object)
-	for i,v in pairs(object:GetChildren()) do
-		if v:IsA("BasePart") and not v.Parent:FindFirstChild("Humanoid") then
-			v.LocalTransparencyModifier = 0.9
-		end
-		XrayOn(v)
-	end
-end
-function XrayOff(object)
-	for i,v in pairs(object:GetChildren()) do
-		if v:IsA("BasePart") and not v.Parent:FindFirstChild("Humanoid") then
-			v.LocalTransparencyModifier = 0
-		end
-		XrayOff(v)
-	end
-end
-local noclip = false
-local xray = false
-local toggle1 = false
-local emotes = false
-function stuff(input, gameProcessed)
-	if not gameProcessed then
-		if input.KeyCode == Enum.KeyCode.R and ss.Noclip then
-			noclip = not noclip
-			notif("Noclip toggled: "..tostring(noclip))
-			player.Character.Humanoid:ChangeState(11)
-			repeat
-				player.Character.Humanoid:ChangeState(11)
-				RunService.Stepped:Wait()
-			until noclip == false
-		end
-		if input.KeyCode == Enum.KeyCode.T and ss.Xray then
-			xray = not xray
-			notif("Xray toggled: "..tostring(xray))
-			if xray then
-				XrayOn(object)
-			else
-				XrayOff(object)
+		look_for_map_in(workspace)
+		print("Found map: ", map.Name)
+		if map ~= nil then
+			if map:FindFirstChild("GlitchProof") ~= nil then
+				print("Found map: ", map.Name)
+				map:FindFirstChild("GlitchProof"):Destroy()
 			end
 		end
-		if input.KeyCode == Enum.KeyCode.RightControl then
-			toggle1 = not toggle1
-			if toggle1 then
-				Topbar.Visible = false
-				notif("Gui is now invisible")
-			else
-				Topbar.Visible = true
-				notif("Gui is now visible")
-			end
-		end
-	end
-end
-UIS.InputBegan:Connect(stuff)
-local ctrlpressed = false
-mouse.Button1Down:Connect(function()
-	if ctrlpressed and ss.CtrlClickTP then
-		player.Character:MoveTo(mouse.Hit.p)
-	end
-end)
-UIS.InputBegan:Connect(function(input, gameProcessed)
-	if input.KeyCode == Enum.KeyCode.LeftControl and not gameProcessed then
-		ctrlpressed = true
-	end
-end)
-UIS.InputEnded:Connect(function(input, gameProcessed)
-	if input.KeyCode == Enum.KeyCode.LeftControl and not gameProcessed then
-		ctrlpressed = false
-	end
-end)
-local mbtn = false -- murderer button
-local sbtn = false -- sheriff button
-Murderer.MouseButton1Click:Connect(function()
-	if Murderer.Text ~= "None" then
-		if mbtn == false then
-			camera.CameraSubject = players[Murderer.Text].Character.Humanoid
-			Spectating.Visible = true
-			Spectating.Text = "Spectating: "..Murderer.Text
-			Spectating.TextColor3 = Color3.fromRGB(255, 0, 0)
-			mbtn = true
-			sbtn = false
-		elseif mbtn == true then
-			camera.CameraSubject = player.Character.Humanoid
-			Spectating.Visible = false
-			Spectating.Text = "Spectating: None"
-			Spectating.TextColor3 = Color3.fromRGB(255, 255, 255)
-			mbtn = false
-		end
-	end
-end)
-Sheriff.MouseButton1Click:Connect(function()
-	if Sheriff.Text ~= "None" then
-		if sbtn == false then
-			camera.CameraSubject = players[Sheriff.Text].Character.Humanoid
-			Spectating.Visible = true
-			Spectating.Text = "Spectating: "..Sheriff.Text
-			Spectating.TextColor3 = Color3.fromRGB(0, 0, 255)
-			sbtn = true
-			mbtn = false
-		elseif sbtn == true then
-			camera.CameraSubject = player.Character.Humanoid
-			Spectating.Visible = false
-			Spectating.Text = "Spectating: None"
-			Spectating.TextColor3 = Color3.fromRGB(255, 255, 255)
-			sbtn = false
-		end
-	end
-end)
-GunDrop.MouseButton1Click:Connect(function()
-	pcall(function()
-		if workspace:FindFirstChild("GunDrop",true) and GunDrop.Text == "True" then
-			local hrp = player.Character.HumanoidRootPart
-			local OldCF = hrp.CFrame
-			hrp.CFrame = workspace.GunDrop.CFrame
-			wait(0.2)
-			hrp.CFrame = OldCF
-		end
+		local player_name = script.Parent.Parent.player_textbox.Text
+		local player = game.Players:FindFirstChild(player_name)
+		game.Players.LocalPlayer.Character:MoveTo(player.Character.Head.Position)
 	end)
-end)
-if ss.UnlockEmotes and player.PlayerGui.MainGUI then -- did not make this btw
-	for i,v in pairs(player.PlayerGui.MainGUI.Game.Emotes.EmotePages:GetChildren()) do
-		if v.Name == "MM2 Utilities" then v:Destroy() end
-	end
-	local emote = require(game:GetService("ReplicatedStorage").Modules.EmoteModule).GeneratePage
-	local target = player.PlayerGui.MainGUI.Game.Emotes
-	local emotelist = { "headless","zombie","zen","ninja","floss","dab" }
-	emote(emotelist,target,"MM2 Utilities")
 end
-function dragify(Frame)
-	dragToggle = nil
-	local dragSpeed = 0.5
-	dragInput = nil
-	dragStart = nil
-	local dragPos = nil
-	function updateInput(input)
-		local Delta = input.Position - dragStart
-		local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
-		TweenService:Create(Frame, TweenInfo.new(0.25), {Position = Position}):Play()
-	end
-	Frame.InputBegan:Connect(function(input)
-		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
-			dragToggle = true
-			dragStart = input.Position
-			startPos = Frame.Position
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					dragToggle = false
+coroutine.wrap(MXUYWL_fake_script)()
+local function FPWFKX_fake_script() -- speed_button.LocalScript 
+	local script = Instance.new('LocalScript', speed_button)
+
+	script.Parent.MouseButton1Click:connect(function()
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(script.Parent.Parent:FindFirstChild("speed_textbox").Text)
+	end)
+end
+coroutine.wrap(FPWFKX_fake_script)()
+local function OEDWTLQ_fake_script() -- get_coins.LocalScript 
+	local script = Instance.new('LocalScript', get_coins)
+
+	script.Parent.MouseButton1Click:connect(function()
+		local LocalPlayer = game.Players.LocalPlayer
+		local map = nil
+		local function look_for_map_in(part) 
+			for _,v in pairs(part:GetChildren()) do
+				if v:IsA("Model") then
+					for _,d in pairs(v:GetChildren()) do
+						if d.Name == "Map" then
+							map = v
+						end
+					end
 				end
-			end)
-		end
-	end)
-	Frame.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-			dragInput = input
-		end
-	end)
-	game:GetService("UserInputService").InputChanged:Connect(function(input)
-		if input == dragInput and dragToggle then
-			updateInput(input)
-		end
-	end)
-end
-dragify(Topbar) -- credit to this guy: https://www.roblox.com/library/5021849770/Smooth-Drag
-print("Loaded all scripts     [5/6]")
-function ApplyTheme(Color1, Color2, Color3, MColor1, MColor2, SColor1, SColor2, GColor1, TextFont, TextColor)
-	Topbar.BackgroundColor3 = Color1
-	Murderer.BackgroundColor3 = Color2
-	Sheriff.BackgroundColor3 = Color2
-	GunDrop.BackgroundColor3 = Color2
-	Main.BackgroundColor3 = Color3
-	MurdererText.TextColor3 = MColor1
-	Murderer.TextColor3 = MColor2
-	SheriffText.TextColor3 = SColor1
-	Sheriff.TextColor3 = SColor2
-	GunDropText.TextColor3 = GColor1
-	Title.Font = TextFont
-	Murderer.Font = TextFont
-	MurdererText.Font = TextFont
-	Sheriff.Font = TextFont
-	SheriffText.Font = TextFont
-	GunDrop.Font = TextFont
-	GunDropText.Font = TextFont
-	Credit.Font = TextFont
-	Title.TextColor3 = TextColor
-	Credit.TextColor3 = TextColor
-end
-ApplyTheme(ss.Color1, ss.Color2, ss.Color3, ss.MColor1, ss.MColor2, ss.SColor1, ss.SColor2, ss.GColor1, ss.TextFont, ss.MainTextColor)
-function PresetTheme(Theme)
-	local theme
-	if Theme == "Carbon" then
-		theme = {
-			Color1 = Color3.fromRGB(19,19,19),
-			Color2 = Color3.fromRGB(19,19,19),
-			Color3 = Color3.fromRGB(24,24,24),
-			MColor1 = Color3.fromRGB(255,0,0),
-			MColor2 = Color3.fromRGB(255,255,255),
-			SColor1 = Color3.fromRGB(0,0,255),
-			SColor2 = Color3.fromRGB(255,255,255),
-			GColor1 = Color3.fromRGB(0,255,0),
-			GColorT = Color3.fromRGB(100,255,100),
-			GColorF = Color3.fromRGB(255,100,100),
-			TextFont = ss.TextFont,
-			MainTextColor = Color3.fromRGB(255,255,255)
-		}
-		ApplyTheme(theme.Color1, theme.Color2, theme.Color3, theme.MColor1, theme.MColor2, theme.SColor1, theme.SColor2, theme.GColor1, theme.TextFont, theme.MainTextColor)
-	elseif Theme == "Strawberry" then
-		theme = {
-			Color1 = Color3.fromRGB(244,143,177),
-			Color2 = Color3.fromRGB(244,143,177),
-			Color3 = Color3.fromRGB(248,187,208),
-			MColor1 = Color3.fromRGB(255,0,170),
-			MColor2 = Color3.fromRGB(255,255,255),
-			SColor1 = Color3.fromRGB(255,0,170),
-			SColor2 = Color3.fromRGB(255,255,255),
-			GColor1 = Color3.fromRGB(255,0,170),
-			GColorT = Color3.fromRGB(255,255,255),
-			GColorF = Color3.fromRGB(255,255,255),
-			TextFont = ss.TextFont,
-			MainTextColor = Color3.fromRGB(255,255,255)
-		}
-		ss.GColorT = theme.GColorT
-		ss.GColorF = theme.GColorF
-		ApplyTheme(theme.Color1, theme.Color2, theme.Color3, theme.MColor1, theme.MColor2, theme.SColor1, theme.SColor2, theme.GColor1, theme.TextFont, theme.MainTextColor)
-	elseif Theme == "SkyBlue" then
-		theme = {
-			Color1 = Color3.fromRGB(59,132,235),
-			Color2 = Color3.fromRGB(59,132,235),
-			Color3 = Color3.fromRGB(120,172,245),
-			MColor1 = Color3.fromRGB(0,0,255),
-			MColor2 = Color3.fromRGB(255,255,255),
-			SColor1 = Color3.fromRGB(0,0,255),
-			SColor2 = Color3.fromRGB(255,255,255),
-			GColor1 = Color3.fromRGB(0,0,255),
-			GColorT = Color3.fromRGB(255,255,255),
-			GColorF = Color3.fromRGB(255,255,255),
-			TextFont = ss.TextFont,
-			MainTextColor = Color3.fromRGB(255,255,255)
-		}
-		ss.GColorT = theme.GColorT
-		ss.GColorF = theme.GColorF
-		ApplyTheme(theme.Color1, theme.Color2, theme.Color3, theme.MColor1, theme.MColor2, theme.SColor1, theme.SColor2, theme.GColor1, theme.TextFont, theme.MainTextColor)
-	elseif Theme == "Emerald" then
-		theme = {
-			Color1 = Color3.fromRGB(29,185,84),
-			Color2 = Color3.fromRGB(29,185,84),
-			Color3 = Color3.fromRGB(92,255,105),
-			MColor1 = Color3.fromRGB(0,225,0),
-			MColor2 = Color3.fromRGB(255,255,255),
-			SColor1 = Color3.fromRGB(0,225,0),
-			SColor2 = Color3.fromRGB(255,255,255),
-			GColor1 = Color3.fromRGB(0,225,0),
-			GColorT = Color3.fromRGB(255,255,255),
-			GColorF = Color3.fromRGB(255,255,255),
-			TextFont = ss.TextFont,
-			MainTextColor = Color3.fromRGB(255,255,255)
-		}
-		ss.GColorT = theme.GColorT
-		ss.GColorF = theme.GColorF
-		ApplyTheme(theme.Color1, theme.Color2, theme.Color3, theme.MColor1, theme.MColor2, theme.SColor1, theme.SColor2, theme.GColor1, theme.TextFont, theme.MainTextColor)
-	end
-end
-PresetTheme(ss.PresetTheme)
-print("Applied custom theme   [6/6]")
-Title.Text = "MM2 Utilities"
-local goal1 = {} goal1.TextTransparency = 0
-function fadetext(obj, delay) TweenService:Create(obj, TweenInfo.new(delay,Enum.EasingStyle.Linear,Enum.EasingDirection.Out),goal1):Play() end
-function LoadAnimation()
-	local loadtime = tick()
-	Topbar.Size = UDim2.new(0,0,0,0)
-	Topbar.Visible = false
-	Title.TextTransparency = 1
-	Main.Size = UDim2.new(0,0,0,0)
-	Main.Visible = false
-	MurdererText.TextTransparency = 1
-	Murderer.TextTransparency = 1
-	SheriffText.TextTransparency = 1
-	Sheriff.TextTransparency = 1
-	GunDropText.TextTransparency = 1
-	GunDrop.TextTransparency = 1
-	Credit.TextTransparency = 1
-	Topbar.Visible = true
-	Topbar:TweenSize(UDim2.new(0,30,0,30),"Out","Sine","0.3")
-	wait(0.3)
-	Topbar:TweenSize(UDim2.new(0,170,0,30),"Out","Sine","0.5")
-	wait(0.5)
-	fadetext(Title, 0.5)
-	Main.Visible = true
-	Main.Size = UDim2.new(0,170,0,30)
-	Main:TweenSize(UDim2.new(0,170,0,209),"Out","Sine","0.7")
-	wait(0.2)
-	fadetext(MurdererText, 0.2)
-	wait(0.07)
-	fadetext(Murderer, 0.2)
-	wait(0.07)
-	fadetext(SheriffText, 0.2)
-	wait(0.06)
-	fadetext(Sheriff, 0.2)
-	wait(0.06)
-	fadetext(GunDropText, 0.2)
-	wait(0.05)
-	fadetext(GunDrop, 0.2)
-	wait(0.05)
-	fadetext(Credit, 0.2)
-	print("Loaded animation, took "..tick()-loadtime.." seconds")
-end
-LoadAnimation()
-local l = game:GetService("Lighting")
-getgenv().oldl = { Ambient = l.Ambient, Brightness = l.Brightness, GlobalShadows = l.GlobalShadows }
-function StartMM2()
-	if ss.Enabled then
-		pcall(bruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruhbruh)
-		ApplyTheme(ss.Color1, ss.Color2, ss.Color3, ss.MColor1, ss.MColor2, ss.SColor1, ss.SColor2, ss.GColor1, ss.TextFont, ss.MainTextColor)
-		PresetTheme(ss.PresetTheme)
-		player.Character.Humanoid.WalkSpeed = ss.WalkSpeed
-		player.Character.Humanoid.JumpPower = ss.JumpPower
-		camera.FieldOfView = ss.FieldOfView
-		player.DevCameraOcclusionMode = ss.CameraMode
-		player.CameraMaxZoomDistance = ss.MaxZoom
-		if ss.RemoveBlackScreen then
-			player.PlayerGui.SpawnFade.Fade.Visible = false
-			player.PlayerGui.CameraFade.Fade.Visible = false
-		end
-		if ss.Fullbright then
-			l.Ambient = Color3.fromRGB(255,255,255)
-			l.Brightness = 50
-			l.GlobalShadows = false
-		else
-			l.Ambient = getgenv().oldl.Ambient
-			l.Brightness = getgenv().oldl.Brightness
-			l.GlobalShadows = getgenv().oldl.GlobalShadows
-		end
-		if ss.UnlockEmotes and player.PlayerGui.MainGUI then -- did not make this btw
-			local emote = require(game:GetService("ReplicatedStorage").Modules.EmoteModule).GeneratePage
-			local target = player.PlayerGui.MainGUI.Game.Emotes
-			local emotelist = { "headless","zombie","zen","ninja","floss","dab" }
-			if not player.PlayerGui.MainGUI.Game.Emotes.EmotePages:FindFirstChild("MM2 Utilities") then
-				emote(emotelist,target,"MM2 Utilities")
-				notif("Unlocked emotes")
 			end
 		end
-	end
+		look_for_map_in(workspace)
+		print("Found map: ", map.Name)
+		if map ~= nil then
+			if map:FindFirstChild("GlitchProof") ~= nil then
+				print("Found map: ", map.Name)
+				map:FindFirstChild("GlitchProof"):Destroy()
+			end
+		end
+		local coins_model = map:FindFirstChild("CoinContainer")
+		while true do
+			if workspace:FindFirstChild(map.Name) == nil then
+				break
+			end
+			for _,v in pairs(coins_model:GetChildren()) do
+				print("Looking for the coins in ", v.Name)
+				if v.Name == "Coin_Server" then
+					print("Found coin, moving player to it")
+					LocalPlayer.Character:moveTo(v.Position)
+					wait(tonumber(script.Parent.Parent.coin_textbox.Text))
+				end
+			end
+		end
+	end)
 end
-pcall(StartMM2)
-if not getgenv().MM2_UTILITIES_LOADED then
-	print("\n███╗░░░███╗███╗░░░███╗██████╗░  ██╗░░░██╗████████╗██╗██╗░░░░░██╗████████╗██╗███████╗░██████╗\n████╗░████║████╗░████║╚════██╗  ██║░░░██║╚══██╔══╝██║██║░░░░░██║╚══██╔══╝██║██╔════╝██╔════╝\n██╔████╔██║██╔████╔██║░░███╔═╝  ██║░░░██║░░░██║░░░██║██║░░░░░██║░░░██║░░░██║█████╗░░╚█████╗░\n██║╚██╔╝██║██║╚██╔╝██║██╔══╝░░  ██║░░░██║░░░██║░░░██║██║░░░░░██║░░░██║░░░██║██╔══╝░░░╚═══██╗\n██║░╚═╝░██║██║░╚═╝░██║███████╗  ╚██████╔╝░░░██║░░░██║███████╗██║░░░██║░░░██║███████╗██████╔╝\n╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚═════╝░░░░╚═╝░░░╚═╝╚══════╝╚═╝░░░╚═╝░░░╚═╝╚══════╝╚═════╝░")
-	print('Press "Left Ctrl" to toggle gui visibility')
-	print('Executing multiple times will cause notification spam, disable "Notifications" to prevent this')
-	print("Made By #vanila_cream")
+coroutine.wrap(OEDWTLQ_fake_script)()
+local function DJQE_fake_script() -- noclip_button.LocalScript 
+	local script = Instance.new('LocalScript', noclip_button)
+
+	script.Parent.MouseButton1Click:connect(function()
+		noclip = false
+		game:GetService('RunService').Stepped:connect(function()
+			if noclip then
+				game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+			end
+		end)
+		plr = game.Players.LocalPlayer
+		mouse = plr:GetMouse()
+		mouse.KeyDown:connect(function(key)
+	
+			if key == "e" then
+				noclip = not noclip
+				game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+			end
+		end)
+		print('Loaded')
+		print('Press "E" to noclip')
+	end)
 end
-getgenv().MM2_UTILITIES_LOADED = true
-while wait(2) do
-	pcall(StartMM2)
+coroutine.wrap(DJQE_fake_script)()
+local function VQCOB_fake_script() -- teleport_random.LocalScript 
+	local script = Instance.new('LocalScript', teleport_random)
+
+	script.Parent.MouseButton1Click:connect(function()
+		local map = nil
+		local function look_for_map_in(part) 
+			for _,v in pairs(part:GetChildren()) do
+				if v:IsA("Model") then
+					for _,d in pairs(v:GetChildren()) do
+						if d.Name == "Map" then
+							map = v
+						end
+					end
+				end
+			end
+		end
+		look_for_map_in(workspace)
+		print("Found map: ", map.Name)
+		if map ~= nil then
+			if map:FindFirstChild("GlitchProof") ~= nil then
+				print("Found map: ", map.Name)
+				map:FindFirstChild("GlitchProof"):Destroy()
+			end
+		end
+		while true do
+			local players = game.Players:GetPlayers()
+			local player = players[math.random(1, #players)]
+			game.Players.LocalPlayer.Character:MoveTo(player.Character.Head.Position)
+			wait(tonumber(script.Parent.Parent.tele_random_textbox.Text))
+		end
+	end)
 end
+coroutine.wrap(VQCOB_fake_script)()
+local function VCAHJ_fake_script() -- xray_button.LocalScript 
+	local script = Instance.new('LocalScript', xray_button)
+
+	script.Parent.MouseButton1Click:connect(function()
+		transparency = tonumber(script.Parent.Parent.xray_textbox.Text)
+		local function iterate_in(model)
+			for _,v in pairs(model:GetChildren()) do
+				if v:IsA("Part") then
+					v.Transparency = transparency
+				end
+				if v:IsA("Folder") or v:IsA("Model") then
+					iterate_in(v)
+				end
+			end
+		end
+		iterate_in(workspace)
+	end)
+end
+coroutine.wrap(VCAHJ_fake_script)()
+local function RLALMIQ_fake_script() -- btools.LocalScript 
+	local script = Instance.new('LocalScript', btools)
+
+	script.Parent.MouseButton1Click:connect(function()
+		local function unlock_with_model(obj)
+			for i,v in pairs(obj:GetChildren()) do
+				if v:IsA("Part") then
+					v.Locked = false
+				end
+				if v:IsA("Model") then
+					unlock_with_model(v)
+				end
+				if v:IsA("Folder") then
+					unlock_with_model(v)
+				end
+			end
+		end
+		unlock_with_model(workspace)
+		Instance.new("HopperBin", game.Players.LocalPlayer.Backpack).BinType = 2
+		Instance.new("HopperBin", game.Players.LocalPlayer.Backpack).BinType = 3
+		Instance.new("HopperBin", game.Players.LocalPlayer.Backpack).BinType = 4
+	end)
+end
+coroutine.wrap(RLALMIQ_fake_script)()
+local function UBNSZP_fake_script() -- open.LocalScript 
+	local script = Instance.new('LocalScript', open)
+
+	script.Parent.MouseButton1Click:connect(function()
+		script.Parent.Parent.Parent:FindFirstChild("main").Visible = true
+	end)
+end
+coroutine.wrap(UBNSZP_fake_script)()
+local function YGPG_fake_script() -- close.LocalScript 
+	local script = Instance.new('LocalScript', close)
+
+	script.Parent.MouseButton1Click:connect(function()
+		script.Parent.Parent.Parent:FindFirstChild("main").Visible = false
+	end)
+end
+coroutine.wrap(YGPG_fake_script)()
